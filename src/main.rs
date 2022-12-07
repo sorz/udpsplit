@@ -82,7 +82,7 @@ async fn main() -> Result<()> {
                 if let Some(remote) = remote.get() {
                     trace!("Forward {} bytes packet to {}", len, remote);
                     if let Err(err) = udp.send_to(&buf[..len], remote).await {
-                        info!("I/O error on forwarding packet to local: {}", err);
+                        info!("I/O error on forwarding packet to remote: {}", err);
                     }
                 } else {
                     debug!("Packet dropped: remote address not ready");

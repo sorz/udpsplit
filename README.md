@@ -8,8 +8,8 @@ flowchart LR
   subgraph Host A
   A[wg] <-->|udp| AU(udpsplit)
   end
-  AU -->|IPv4| BU(udpsplit)
-  BU -->|IPv6| AU
+  AU -->|IPv6| BU(udpsplit)
+  BU -->|IPv4| AU
   subgraph Host B
   BU <-->|udp| B[wg]
   end
@@ -17,9 +17,10 @@ flowchart LR
 
 Basically, it just
 - Listen on UDP port `--port` from everywhere;
-- When a packet is recived from localhost, remeber that address, and forward
+- When a packet is received from localhost, remeber that address, and forward
   the packet to `--remote`;
-- Whenever a non-localhost packet is received, forward it to that localhost;
+- Whenever a non-localhost packet is received, forward it to that localhost
+  address;
 
 So if you run
 - `udpsplit --port 1000 --remote host-B-ipv6:2222` on host A; and
